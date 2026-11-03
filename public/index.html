@@ -2,10 +2,40 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#05060a">
   <title>Bubble Shooter Retro — OhDjiGames</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-  <p>Bubble Shooter Retro — bientôt disponible.</p>
+  <canvas id="game" aria-label="Plateau de jeu Bubble Shooter"></canvas>
+
+  <header id="hud" class="hidden">
+    <div class="hud-block">
+      <span class="hud-label">Score</span>
+      <span id="score-value" class="hud-value">0</span>
+    </div>
+    <div class="hud-block">
+      <span class="hud-label">Record</span>
+      <span id="highscore-value" class="hud-value">0</span>
+    </div>
+  </header>
+
+  <div id="menu" class="overlay">
+    <h1 class="title">Bubble Shooter</h1>
+    <p class="subtitle">Retro</p>
+    <button id="start-button" type="button">Jouer</button>
+    <p class="hint">Visez, relâchez pour tirer.<br>3 bulles de même couleur = éclatement.</p>
+  </div>
+
+  <div id="gameover" class="overlay hidden">
+    <h1 class="title">Game Over</h1>
+    <p id="final-score" class="final-score">Score : 0</p>
+    <p id="new-record" class="new-record hidden">Nouveau record !</p>
+    <button id="restart-button" type="button">Rejouer</button>
+  </div>
+
+  <script type="module" src="/main.js"></script>
 </body>
 </html>

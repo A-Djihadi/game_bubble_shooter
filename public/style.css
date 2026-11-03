@@ -1,0 +1,180 @@
+/* style.css — Thème rétro arcade du Bubble Shooter.
+   Fond sombre #05060a, accents néon, polices système/monospace.
+   Aucun style inline : tout est ici (CSP stricte style-src 'self'). */
+
+:root {
+  --bg: #05060a;
+  --panel: #0b0e1a;
+  --neon: #ec4899;
+  --neon-2: #22d3ee;
+  --neon-3: #a3e635;
+  --text: #e5e7eb;
+  --muted: #6b7280;
+  --font: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+#game {
+  position: fixed;
+  inset: 0;
+  display: block;
+  touch-action: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* --- HUD (score / record) -------------------------------------------------- */
+#hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.hud-block {
+  display: flex;
+  flex-direction: column;
+  min-width: 90px;
+  padding: 8px 14px;
+  background: rgba(11, 14, 26, 0.7);
+  border: 1px solid rgba(236, 72, 153, 0.35);
+  border-radius: 10px;
+  box-shadow: 0 0 14px rgba(236, 72, 153, 0.18);
+}
+
+.hud-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hud-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--neon);
+  text-shadow: 0 0 10px rgba(236, 72, 153, 0.7);
+}
+
+/* --- Overlays (menu / game over) ------------------------------------------ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  background: radial-gradient(circle at 50% 40%, rgba(236, 72, 153, 0.12), rgba(5, 6, 10, 0.92) 70%);
+  text-align: center;
+  z-index: 20;
+}
+
+.title {
+  margin: 0;
+  font-size: clamp(38px, 9vw, 76px);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  color: var(--text);
+  text-shadow:
+    0 0 8px rgba(236, 72, 153, 0.9),
+    0 0 24px rgba(236, 72, 153, 0.6),
+    0 0 48px rgba(34, 211, 238, 0.35);
+}
+
+.subtitle {
+  margin: -6px 0 8px;
+  font-size: 18px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--neon-2);
+  text-shadow: 0 0 12px rgba(34, 211, 238, 0.8);
+}
+
+.final-score {
+  margin: 0;
+  font-size: 22px;
+  color: var(--text);
+}
+
+.new-record {
+  margin: 0;
+  font-size: 16px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--neon-3);
+  text-shadow: 0 0 12px rgba(163, 230, 53, 0.8);
+  animation: pulse 0.9s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.45; }
+}
+
+button {
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: rgba(236, 72, 153, 0.12);
+  border: 2px solid var(--neon);
+  border-radius: 12px;
+  padding: 14px 44px;
+  cursor: pointer;
+  box-shadow: 0 0 18px rgba(236, 72, 153, 0.35), inset 0 0 12px rgba(236, 72, 153, 0.12);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+
+button:hover,
+button:focus-visible {
+  background: rgba(236, 72, 153, 0.28);
+  box-shadow: 0 0 30px rgba(236, 72, 153, 0.65), inset 0 0 16px rgba(236, 72, 153, 0.25);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.hint {
+  margin: 4px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 320px;
+}
