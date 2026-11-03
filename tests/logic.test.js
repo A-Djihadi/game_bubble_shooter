@@ -1,5 +1,5 @@
 // tests/logic.test.js — Tests Node (node --test) de la logique pure du Bubble Shooter.
-// Zéro dépendance : exécutés par `node --test tests/`.
+// Zéro dépendance : exécutés par `node --test`.
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
