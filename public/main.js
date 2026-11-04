@@ -25,13 +25,15 @@ const SHOTS_TO_NEW_ROW = 6; // tirs ratés avant l'ajout d'une ligne
 const ROW_INTERVAL_START = 12; // secondes avant l'accélération temporelle initiale
 const MAX_AIM_ANGLE = Math.PI / 2 - 0.06; // angle de visée maximal (radians)
 
-// Palette néon (5 couleurs), cohérente avec le hub.
+// Palette de jeu (5 couleurs), alignée sur l'identité OhDjiGames :
+// jaune accent + cyan du hub, complétés de teintes sobres pour le matching.
+// (Couleurs de l'UI commune : bg #05060a, texte #f2f2f2, accent #FFE81F, cyan #4bd5ee.)
 const PALETTE = [
-  { base: '#f43f5e', light: '#fda4af', dark: '#881337' }, // rose
-  { base: '#f59e0b', light: '#fde68a', dark: '#78350f' }, // ambre
-  { base: '#22d3ee', light: '#a5f3fc', dark: '#155e75' }, // cyan
-  { base: '#a3e635', light: '#d9f99d', dark: '#3f6212' }, // lime
-  { base: '#a855f7', light: '#e9d5ff', dark: '#6b21a8' }, // violet
+  { base: '#FFE81F', light: '#fff6a6', dark: '#9c8a00' }, // jaune accent
+  { base: '#4bd5ee', light: '#bff3ff', dark: '#1a7a8f' }, // cyan
+  { base: '#e6e6e6', light: '#ffffff', dark: '#8f8f8f' }, // blanc cassé
+  { base: '#e0513d', light: '#ffb0a5', dark: '#7d2316' }, // rouge brique
+  { base: '#8b6bd8', light: '#cdbdf5', dark: '#453084' }, // violet
 ];
 
 // Clé de persistance du meilleur score (préfixe imposé).
@@ -382,9 +384,9 @@ function render() {
 }
 
 function drawBackground(w, h) {
-  // Fond sombre avec halo central et scanlines rétro.
+  // Fond sombre avec halo central discret et scanlines rétro.
   const g = ctx.createRadialGradient(w / 2, h * 0.4, 0, w / 2, h * 0.4, Math.max(w, h) * 0.8);
-  g.addColorStop(0, '#0d1220');
+  g.addColorStop(0, '#0a0d14');
   g.addColorStop(1, '#05060a');
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, w, h);
@@ -456,7 +458,7 @@ function drawAimLine() {
     : { x: layout.canon.x, y: layout.offsetY };
 
   ctx.save();
-  ctx.strokeStyle = 'rgba(236, 72, 153, 0.55)';
+  ctx.strokeStyle = 'rgba(255, 232, 31, 0.55)';
   ctx.lineWidth = 2;
   ctx.setLineDash([6, 8]);
   ctx.beginPath();
@@ -466,7 +468,7 @@ function drawAimLine() {
   ctx.setLineDash([]);
   // Fantôme de la case visée.
   if (snap) {
-    ctx.strokeStyle = 'rgba(255,255,255,0.5)';
+    ctx.strokeStyle = 'rgba(75, 213, 238, 0.7)';
     ctx.lineWidth = 1.5;
     ctx.beginPath();
     ctx.arc(target.x, target.y, layout.radius, 0, Math.PI * 2);
@@ -480,8 +482,8 @@ function drawCanon() {
   const r = layout.radius;
   // Socle du canon.
   ctx.save();
-  ctx.fillStyle = '#0b0e1a';
-  ctx.strokeStyle = 'rgba(236, 72, 153, 0.7)';
+  ctx.fillStyle = 'rgba(255, 255, 255, 0.05)';
+  ctx.strokeStyle = 'rgba(75, 213, 238, 0.7)';
   ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.moveTo(x - r * 1.4, y + r * 1.6);
